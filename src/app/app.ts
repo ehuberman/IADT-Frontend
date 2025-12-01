@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common'
+// import { RouterOutlet } from '@angular/router';
+import { MatchInfo } from './match-info/match-info';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MatchInfo, CommonModule ],
+  standalone: true,
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
