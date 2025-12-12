@@ -1,15 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common'
-// import { RouterOutlet } from '@angular/router';
-import { MatchInfo } from './match-info/match-info';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [MatchInfo, CommonModule ],
+  imports: [RouterOutlet, CommonModule, Navbar],
   standalone: true,
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('IADT-Frontend');
+  protected readonly title = signal('IADT');
 }
