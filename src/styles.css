@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global Styles */
 * {
   margin: 0;
@@ -7,9 +11,11 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: 
+    linear-gradient(rgba(75, 139, 190, 0.6), rgba(135, 206, 235, 0.5)),
+    url('/images/afa-img-large.jpg') center/contain no-repeat fixed;
   min-height: 100vh;
-  color: #333;
+  color: #1a365d;
 }
 
 /* Container */
@@ -38,18 +44,18 @@ h2 {
 
 /* Cards */
 .card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.75);
   border-radius: 15px;
   padding: 30px;
   margin: 20px 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 30px rgba(75, 139, 190, 0.3);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(75, 139, 190, 0.3);
 }
 
 /* Buttons */
 .btn {
-  background: linear-gradient(45deg, #667eea, #764ba2);
+  background: linear-gradient(45deg, #4b8bbe, #87ceeb);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -62,7 +68,23 @@ h2 {
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(75, 139, 190, 0.4);
+}
+
+/* FullCalendar Styling */
+.fc-toolbar-title {
+  color: #4b8bbe !important;
+  font-weight: bold !important;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  color: white;
+  background: rgba(75, 139, 190, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 /* Loading Animation */
