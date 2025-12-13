@@ -1,0 +1,14 @@
+
+<div class="tactical-approach">
+    <h3>Tactical Approach/Player Instructions</h3>
+    @if (tacticalApproach()) {
+        <div>
+            <p>{{tacticalApproach()}}</p>
+        </div>         
+    }
+    @if (!tacticalApproach()) {
+        <p>Loading Approach...</p>
+    }
+
+    
+</div>

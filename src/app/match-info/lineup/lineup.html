@@ -1,0 +1,137 @@
+<div class="match-header">
+  <h1 class="match-info">Argentina vs {{opponent}}</h1>
+</div>
+
+<h2>Recommended Lineup</h2>
+
+
+@if (lineup()) {
+  <div class="field">
+    <!-- Forwards at the top -->
+    @if (getForwardPositions().length > 0) {
+      <div class="row forwards">
+        @for (fwdPosition of getForwardPositions(); track fwdPosition) {
+          @for (player of lineup()![fwdPosition]; track player) {
+            @if (fwdPosition == "Left Forward" || fwdPosition == "Left Winger" || fwdPosition == "Left Wing" || fwdPosition == "Left Striker") {
+              <div class="player" [class]="getPositionClass(fwdPosition)">{{ player }}</div>
+            }
+          }
+        }
+        @for (fwdPosition of getForwardPositions(); track fwdPosition) {
+          @for (player of lineup()![fwdPosition]; track player) {
+            @if (fwdPosition == "Center Forward" || fwdPosition == "Striker") {
+              <div class="player" [class]="getPositionClass(fwdPosition)">{{ player }}</div>
+            }
+          }
+        }
+        @for (fwdPosition of getForwardPositions(); track fwdPosition) {
+          @for (player of lineup()![fwdPosition]; track player) {
+            @if (fwdPosition == "Right Forward" || fwdPosition == "Right Wing" || fwdPosition == "Right Winger" || fwdPosition == "Right Striker") {
+              <div class="player" [class]="getPositionClass(fwdPosition)">{{ player }}</div>
+            }
+          }
+        }
+      </div>
+    }
+
+    <!-- Render attacking midfield between left-right midfield and strikers -->
+    @if (getAttackingMidfieldPositions().length > 0) {
+      <div class="row attacking-midfield">
+        @for (amPosition of getAttackingMidfieldPositions(); track amPosition) {
+          @for (player of lineup()![amPosition]; track player) {
+            <div class="player" [class]="getPositionClass(amPosition)">{{ player }}</div>
+          }
+        }
+      </div>
+    }
+    
+    <div class="row midfielders">
+      @if (getLeftRightMidfieldPositions().length > 0) {
+        @for (midfieldPosition of getLeftRightMidfieldPositions(); track midfieldPosition) {
+          @for (player of lineup()![midfieldPosition]; track player) {
+            @if (midfieldPosition == "Left Midfield") {
+              <div class="player" [class]="getPositionClass(midfieldPosition)">
+                  {{ player }}     
+              </div>
+            }
+          }
+        }
+      }
+      
+      <!-- Other attacking positions -->
+      @for (position of getNonBackPositions(); track position) {
+        @for (player of lineup()![position]; track player) {
+          <div class="player" [class]="getPositionClass(position)">
+            @if(position =="Left Center Midfield" || position =="Left Central Midfield" || position =="Left Center Midfielder" || position =="Left Central Midfielder") {
+              {{ player }}
+            }
+            @if(position =="Center Midfield" || position == "Central Midfield" || position =="Center Midfielder" || position == "Central Midfielder") {
+              {{ player }}
+            }
+            @if(position =="Right Center Midfield" || position =="Right Central Midfield" || position =="Right Center Midfielder" || position =="Right Central Midfielder") {
+              {{ player }}
+            }
+          </div>
+        }
+      }
+      @if (getLeftRightMidfieldPositions().length > 0) {
+        @for (midfieldPosition of getLeftRightMidfieldPositions(); track midfieldPosition) {
+          @for (player of lineup()![midfieldPosition]; track player) {
+            @if (midfieldPosition == "Right Midfield" || midfieldPosition == "Right Midfielder") {
+              <div class="player" [class]="getPositionClass(midfieldPosition)">    
+                {{ player }}    
+              </div>
+            }
+          }
+        }
+      }
+    </div>
+      
+    
+    <!-- Render defensive midfield above defenders -->
+    @if (getDefensiveMidfieldPositions().length > 0) {
+      <div class="row defensive-midfield">
+        @for (dmPosition of getDefensiveMidfieldPositions(); track dmPosition) {
+          @for (player of lineup()![dmPosition]; track player) {
+            <div class="player" [class]="getPositionClass(dmPosition)">{{ player }}</div>
+          }
+        }
+      </div>
+    }
+    
+    <!-- Render all backs in a single row -->
+    @if (getBackPositions().length > 0) {
+      <div class="row defenders">
+        @for (backPosition of getBackPositions(); track backPosition) {
+          @for (player of lineup()![backPosition]; track player) {
+            <div class="player" [class]="getPositionClass(backPosition)">{{ player }}</div>
+          }
+        }
+      </div>
+    }
+    
+    <!-- Goalkeeper row positioned behind defenders row at bottom -->
+    @if (getGoalkeeperPositions().length > 0) {
+      <div class="row goalkeeper-behind">
+        @for (gkPosition of getGoalkeeperPositions(); track gkPosition) {
+          @for (player of lineup()![gkPosition]; track player) {
+            <div class="player" [class]="getPositionClass(gkPosition)">{{ player }}</div>
+          }
+        }
+      </div>
+    }
+  </div>
+}
+
+@if (!lineup()) {
+  <div class="loading">
+    <div class="spinner"></div>
+    <p class="text-white ml-4 text-xl">Loading lineup...</p>
+  </div>
+}
+
+<!-- <div class="mt-5 p-4 bg-gray-100 rounded-lg">
+  <h3 class="text-lg font-semibold mb-2">Debug Info:</h3>
+  <p class="mb-2">Lineup keys: {{ getPositionKeys().length }}</p>
+  <pre class="text-sm bg-white p-2 rounded overflow-auto">{{ lineup() | json }}</pre>
+</div> -->
