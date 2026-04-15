@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { LineupService } from './lineup.service';
 import { CalendarService } from '../../calendar/calendar.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-lineup',
@@ -12,8 +13,6 @@ import { CalendarService } from '../../calendar/calendar.service';
 })
 export class LineupComponent implements OnInit {
   public lineup = signal<Record<string, string[]> | null>(null);
-  tacticalApproach: string | null = null;
-  playerInstructions: string | null = null;
   constructor(private http: HttpClient, private lineupService: LineupService, private calendarService: CalendarService) {}
 
   get opponent() {
@@ -26,7 +25,7 @@ export class LineupComponent implements OnInit {
   }
 
   fetchLineup() {
-    this.http.post<any>('http://localhost:8000/chat', {
+    this.http.post<any>(`${environment.apiUrl}/chat`, {
       prompt: `You are the coach of Argentina's national mens soccer team on ${this.calendarService.date.toDateString()} and we have a match against ${this.calendarService.opponent}. Given ${this.calendarService.opponent}'s recent lineups, results, tactical approaches, I would like for you to generate a recommended formation and lineup for this match. Only return the lineup as a JSON object where the keys are the exactpositions (e.g., 'Goalkeeper', 'Center Back', 'Right Center Midfield', 'Striker', or any other position names) and the values are arrays of player names. Don't responsd with anything else except the JSON object.`
     }).subscribe(response => {
       console.log("Full response: ", response);
@@ -277,22 +276,4 @@ export class LineupComponent implements OnInit {
     if (!this.lineup()) return [];
     return this.lineup()?.[position] || [] ;
   }
-  // fetchTacticalApproach() {
-  //   this.http.post<any>('http://localhost:8000/prompt', {
-  //     messages: [
-  //       { role: 'user', content: "You are the coach of Argentina's national mens soccer team today July 26, 2025 and we have a match against Brazil. Given Brazil's recent lineups, results, tactical approaches, I would like for you to generate a tactical approach for this match. Only return the tactical approach, no other text." }
-  //     ]
-  //   }).subscribe(response => {
-  //     this.tacticalApproach = response.tacticalApproach;
-  //   });
-  // }
-  // fetchPlayerInstructions() {
-  //   this.http.post<any>('http://localhost:8000/prompt', {
-  //     messages: [
-  //       { role: 'user', content: "You are the coach of Argentina's national mens soccer team today July 26, 2025 and we have a match against Brazil. Given Brazil's recent lineups, results, tactical approaches, I would like for you to generate a recommended player instructions for this match. Only return the player instructions, no other text." }
-  //     ]
-  //   }).subscribe(response => {
-  //     this.playerInstructions = response.playerInstructions;
-  //   });
-  // }
 }

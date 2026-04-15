@@ -1,6 +1,8 @@
-# IADT Frontend (POC)
+# IADT Football Analytics
 
 Angular-based frontend for generating soccer tactics, including lineups, player roles, and tactical approaches using AI.
+
+![Demo](public/IADT.gif)
 
 ## Architecture
 
@@ -26,9 +28,23 @@ The frontend communicates with the backend to generate tactical insights based o
 
 ## Getting Started
 
+This app requires both the frontend and backend to be running.
+
+**1. Start the backend**
+
+Clone the [IADT Backend](https://github.com/ehuberman/IADT-Backend) and follow its setup instructions. You'll need an OpenAI API key in a `.env` file:
+
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+Then start the backend server (default: http://localhost:8000).
+
+**2. Start the frontend**
+
 ```bash
 npm install
-ng serve
+npx ng serve
 ```
 
 Then open the app in your browser (default: http://localhost:4200).
