@@ -2,7 +2,9 @@
 
 Angular-based frontend for generating soccer tactics, including lineups, player roles, and tactical approaches using AI.
 
-![Demo](public/IADT.gif)
+## Demo
+
+![Demo](public/demo/IADT.gif)
 
 ## Architecture
 
